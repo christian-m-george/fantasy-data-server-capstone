@@ -14,5 +14,6 @@ CREATE TABLE players (
     average_draft_position_ppr NUMERIC NOT NULL,
     bye_week NUMERIC NOT NULL,
     last_season_fantasy_points NUMERIC NOT NULL,
-    projected_fantasy_points NUMERIC NOT NULL
+    projected_fantasy_points NUMERIC NOT NULL,
+    player_id INTEGER NOT NULL
 );

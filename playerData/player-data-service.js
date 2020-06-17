@@ -1,16 +1,19 @@
 
 const playerDataService = {
 
-	insertPlayer(knex, newMovie) {
+	insertPlayer(knex, newPlayer) {
+		console.log(newPlayer)
 		return knex.raw(`
-		INSERT INTO players ("Team", "PlayerName" ,"Position", "AverageDraftPosition", "AverageDraftPositionPPR", "ByeWeek", "LastSeasyFantasyPoints", "ProjectedFantasyPoints") 
-		VALUES ('${newMovie.movie_db_id}', 
-				'${newMovie.movie_title.replace(/["']/g, "")}', 
-				'${newMovie.release_date}', 
-				'${newMovie.average_rating}', 
-				'${newMovie.genre}', 
-				'${newMovie.overview.replace(/["']/g, "")}',
-				'${newMovie.img}' 
+		INSERT INTO players ("Team", "PlayerName" ,"Position", "AverageDraftPosition", "AverageDraftPositionPPR", "ByeWeek", "LastSeasyFantasyPoints", "ProjectedFantasyPoints", "PlayerID") 
+		VALUES (${newPlayer.Team},
+				${newPlayer.Name},
+				${newPlayer.Position},
+				${newPlayer.AverageDraftPosition},
+				${newPlayer.AverageDraftPositionPPR},
+				${newPlayer.ByeWeek},
+				${newPlayer.LastSeaonFantasyPoints},
+				${newPlayer.ProjectedFantasyPoints},
+				${newPlayer.FantasyPlayerKey}
 				)
 				ON CONFLICT("Team", "Position") DO NOTHING;
  		`)

@@ -77,7 +77,6 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
 
       let validatedData = response.data.map((player) => {
         let output = {
-          FantasyPlayerKey: checkString(player.FantasyPlayerKey),
           PlayerID: checkInteger(player.PlayerID),
           Name: checkString(player.Name),
           Team: checkString(player.Team),
@@ -90,26 +89,26 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
         };
         return output;
       });
-      res.json(validatedData);
-      let dbSavePlayer = [];
-    //   let data = response.data.results;
-      console.log(data);
+      console.log(validatedData);
+      // let dbSavePlayer = [];
 
-      dbSavePlayer[i] = {
-        FantasyPlayerKey: validatedData.FantasyPlayerKey,
-        PlayerID: validatedData.PlayerID,
-        Name: validatedData.Name,
-        Team: validatedData.Team,
-        Position: validatedData.Position,
-        AverageDraftPosition: validatedData.AverageDraftPosition,
-        AverageDraftPositionPPR: validatedData.AverageDraftPositionPPR,
-        ByeWeek: validatedData.ByeWeek,
-        LastSeasonFantasyPoints: validatedData.LastSeasonFantasyPoints,
-        ProjectedFantasyPoints: validatedData.ProjectedFantasyPoints
-      };
+
+      // dbSavePlayer[i] = {
+      //   FantasyPlayerKey: validatedData.FantasyPlayerKey,
+      //   PlayerID: validatedData.PlayerID,
+      //   Name: validatedData.Name,
+      //   Team: validatedData.Team,
+      //   Position: validatedData.Position,
+      //   AverageDraftPosition: validatedData.AverageDraftPosition,
+      //   AverageDraftPositionPPR: validatedData.AverageDraftPositionPPR,
+      //   ByeWeek: validatedData.ByeWeek,
+      //   LastSeasonFantasyPoints: validatedData.LastSeasonFantasyPoints,
+      //   ProjectedFantasyPoints: validatedData.ProjectedFantasyPoints
+      // };
       playerDataService
-        .insertPlayer(req.app.get("db"), dbSavePlayer[i])
+        .insertPlayer(req.app.get("db"), validatedData)
         .then((data) => {
+          res.json(validatedData);
           next();
         })
         .catch((err) => {
