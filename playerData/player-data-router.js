@@ -107,7 +107,7 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
       // };
       playerDataService
         .insertPlayer(req.app.get("db"), validatedData)
-        .then((data) => {
+        .then((validatedData) => {
           res.json(validatedData);
           next();
         })

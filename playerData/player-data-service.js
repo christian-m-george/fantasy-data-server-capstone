@@ -1,44 +1,52 @@
-
 const playerDataService = {
-
-	insertPlayer(knex, newPlayer) {
-		console.log(newPlayer)
-		return knex.raw(`
-		INSERT INTO players ("Team", "PlayerName" ,"Position", "AverageDraftPosition", "AverageDraftPositionPPR", "ByeWeek", "LastSeasyFantasyPoints", "ProjectedFantasyPoints", "PlayerID") 
-		VALUES (${newPlayer.Team},
-				${newPlayer.Name},
-				${newPlayer.Position},
-				${newPlayer.AverageDraftPosition},
-				${newPlayer.AverageDraftPositionPPR},
-				${newPlayer.ByeWeek},
-				${newPlayer.LastSeaonFantasyPoints},
-				${newPlayer.ProjectedFantasyPoints},
-				${newPlayer.FantasyPlayerKey}
+  insertPlayer(knex, newPlayer) {
+    console.log(newPlayer, "this is log");
+    newPlayer.map((player) => {
+      return knex
+        .raw(
+          `
+			INSERT INTO public.players
+			("team",
+			 "player_name",
+			 "position",
+			"average_draft_position",
+			"average_draft_position_ppr",
+			"bye_week",
+			"last_season_fantasy_points",
+			"projected_fantasy_points",
+			"player_id")
+			VALUES (
+				'${player.Team}',
+				'${player.Name.replace("'"," ")}',
+				'${player.Position}',
+				'${player.AverageDraftPosition}',
+				'${player.AverageDraftPositionPPR}',
+				'${player.ByeWeek}',
+				'${player.LastSeasonFantasyPoints}',
+				'${player.ProjectedFantasyPoints}',
+				'${player.PlayerID}'
 				)
-				ON CONFLICT("Team", "Position") DO NOTHING;
- 		`)
-			.then(rows => {
+				ON CONFLICT("player_id") DO NOTHING;
+ 		`
+        )
+        .then((rows) => {
+          return rows;
+        });
+    });
+  },
 
-				return rows
-			})
-	},
+  getById(knex, id) {
+    return knex.from("movies").select("*").where("movie_db_id", id).first();
+  },
 
-	getById(knex, id) {
-		return knex
-			.from('movies')
-			.select('*')
-			.where('movie_db_id', id)
-			.first()
-	},
-
-	getByName(knex, name) {
-		console.log(name)
-		return knex
-			.from('movies')
-			.select('*')
-			.where('name', 'LIKE', `%${name}%`)
-			.first()
-	},
-}
+  getByName(knex, name) {
+    console.log(name);
+    return knex
+      .from("movies")
+      .select("*")
+      .where("name", "LIKE", `%${name}%`)
+      .first();
+  },
+};
 
 module.exports = playerDataService;

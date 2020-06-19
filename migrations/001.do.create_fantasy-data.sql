@@ -15,5 +15,5 @@ CREATE TABLE players (
     bye_week NUMERIC NOT NULL,
     last_season_fantasy_points NUMERIC NOT NULL,
     projected_fantasy_points NUMERIC NOT NULL,
-    player_id INTEGER NOT NULL
+    player_id INTEGER UNIQUE NOT NULL
 );
