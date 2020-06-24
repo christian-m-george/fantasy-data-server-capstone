@@ -32,12 +32,11 @@ const playerDataService = {
         .then((rows) => {
           return rows;
         });
-    });
+	});
+	return "done"
   },
 
-  getById(knex, id) {
-    return knex.from("movies").select("*").where("movie_db_id", id).first();
-  },
+
 
   getByName(knex, name) {
     console.log(name);

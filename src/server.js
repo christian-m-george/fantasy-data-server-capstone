@@ -17,6 +17,7 @@ const db = knex({
 app.set('db', db);
 
 app.use(require('../playerData/player-data-router'));
+app.use(require('../playerDetailData/player-detail-router'));
 
 
 app.listen(PORT, () => {

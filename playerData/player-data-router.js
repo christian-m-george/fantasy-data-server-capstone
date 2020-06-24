@@ -22,7 +22,7 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
       //   }
     )
     .then(function (response) {
-      console.log(response);
+      // console.log(response);
 
       function checkInteger(inputInteger) {
         let outputValue = inputInteger;
@@ -89,7 +89,7 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
         };
         return output;
       });
-      console.log(validatedData);
+      // console.log(validatedData);
       // let dbSavePlayer = [];
 
 
@@ -105,15 +105,28 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
       //   LastSeasonFantasyPoints: validatedData.LastSeasonFantasyPoints,
       //   ProjectedFantasyPoints: validatedData.ProjectedFantasyPoints
       // };
+
+    //   userService.deleteUser(
+    //     req.app.get('db'),
+    //     user_id
+    // )
+    //     .then(numRowsAffected => {
+    //         res.status(204).end()
+    //     })
+    //     .catch(next)
+
+
+
       playerDataService
         .insertPlayer(req.app.get("db"), validatedData)
-        .then((validatedData) => {
-          res.json(validatedData);
-          next();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        // .then(insertPlayerResponse => {
+        //   res.status(200).json(validatedData);
+        //   // next();
+        // })
+        // .catch((err) => {
+        //   console.log(err);
+        //   next();
+        // });
     })
     .catch((err) => console.log(err));
 });
