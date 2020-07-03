@@ -1,6 +1,6 @@
 const playerDataService = {
   insertPlayer(knex, newPlayer) {
-    console.log(newPlayer, "this is log");
+    // console.log(newPlayer, "this is log");
     newPlayer.map((player) => {
       return knex
         .raw(

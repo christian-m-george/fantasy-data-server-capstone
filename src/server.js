@@ -1,5 +1,6 @@
 const knex = require('knex');
 const cors = require('cors');
+// const PlayerRouter = require('./playerData/player-data-router')
 
 const app = require('./app');
 const {
@@ -16,8 +17,8 @@ const db = knex({
 
 app.set('db', db);
 
-app.use(require('../playerData/player-data-router'));
-app.use(require('../playerDetailData/player-detail-router'));
+app.use(require('./playerData/player-data-router'));
+app.use(require('./playerDetailData/player-detail-router'));
 
 
 app.listen(PORT, () => {

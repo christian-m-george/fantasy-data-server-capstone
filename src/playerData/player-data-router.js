@@ -88,8 +88,10 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
           ProjectedFantasyPoints: player.ProjectedFantasyPoints
         };
         return output;
+      
       });
-      // console.log(validatedData);
+      
+      console.log(validatedData, 'this is validated data');
       // let dbSavePlayer = [];
 
 
@@ -127,6 +129,7 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
         //   console.log(err);
         //   next();
         // });
+        res.status(200).json(validatedData)
     })
     .catch((err) => console.log(err));
 });
