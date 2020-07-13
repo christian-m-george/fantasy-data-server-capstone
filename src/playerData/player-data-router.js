@@ -91,7 +91,7 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
       
       });
       
-      console.log(validatedData, 'this is validated data');
+      // console.log(validatedData, 'this is validated data');
       // let dbSavePlayer = [];
 
 
