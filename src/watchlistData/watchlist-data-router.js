@@ -6,8 +6,9 @@ const watchlistDataService = require('./watchlist-data-service')
 
 watchlistRouter
     .route('/watchlist/1')
-    .get((req, res, next) => {
-        watchlistDataService.getWatchlistByUserId(req.app.get('db'))
+    .get(jsonParser, (req, res, next) => {
+        const { user_id } = req.body
+        watchlistDataService.getWatchlistByUserId(req.app.get('db'), user_id)
             .then(user => {
                 res.json(user)
             })
@@ -31,6 +32,14 @@ watchlistRouter
                 res
                     .status(201)
                     .json(response)
+            })
+            .catch(next)
+    })
+    .delete(jsonParser, (req, res, next) => {
+        const { user_id, player_id } = req.body
+        watchlistDataService.deletePlayer(req.app.get('db'), user_id, player_id)
+            .then(user => {
+                res.json(user)
             })
             .catch(next)
     })

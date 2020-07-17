@@ -1,10 +1,9 @@
 const watchlistDataService = {
-	getWatchlistByUserId(knex, userId) {
+	getWatchlistByUserId(knex, user_id) {
 		return knex
 		  .from("watchlist")
-		  .select("playerId")
-		  .where("userId", "LIKE", `%${userId}%`)
-		  .first();
+		  .select("player_id")
+		  .where("user_id", user_id)
 	  },
 	insertPlayer(knex, newPlayer) {
 		return knex
@@ -15,10 +14,10 @@ const watchlistDataService = {
 				return rows[0]
 			})
 	},
-	deletePlayer(knex, id) {
+	deletePlayer(knex, user_id, player_id) {
 		return knex('watchlist')
 			.where({
-				id
+				user_id, player_id
 			})
 			.delete()
 	},
