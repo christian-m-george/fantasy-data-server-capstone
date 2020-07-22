@@ -1,18 +1,21 @@
 const express = require("express");
 const path = require("path");
-// const playerDetailService = require("./player-detail-service");
+const playerDetailService = require("./player-detail-service");
 const playerDetailRouter = express.Router();
 const axios = require("axios");
 
-https: playerDetailRouter.route("/player/details/season").get((req, res, next) => {
+https: playerDetailRouter.route("/player/details/season/:PlayerID").get((req, res, next) => {
   const knexInstance = req.app.get("db");
 
   let season = "2019REG";
-  let playerID = 18877;
+  let playerID = req.params.PlayerID;
 
   axios
     .get(
-      `https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStatsByPlayerID/${season}/${playerID}?key=4f05923a8fb2495db32041a3ac9b913a`
+      // old key
+      // `https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStatsByPlayerID/${season}/${playerID}?key=4f05923a8fb2495db32041a3ac9b913a`
+      // new key
+      `https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStatsByPlayerID/${season}/${playerID}?key=79297b2d2a984157bbf6a4174dd9be9e`
     )
     .then(function (response) {
       console.log(response);
@@ -210,7 +213,8 @@ https: playerDetailRouter.route("/player/details/season").get((req, res, next) =
       };
 
       console.log(output);
-      let dbSavePlayer = [];
+      playerDetailService.insertPlayerDetails(output)
+      
     })
     .catch((err) => console.log(err));
 });
@@ -225,7 +229,10 @@ https: playerDetailRouter.route("/player/details/week").get((req, res, next) => 
 
   axios
     .get(
-      `https://api.sportsdata.io/v3/nfl/stats/json/PlayerGameStatsByPlayerID/${season}/${week}/${playerID}?key=4f05923a8fb2495db32041a3ac9b913a`
+      // old key
+      // `https://api.sportsdata.io/v3/nfl/stats/json/PlayerGameStatsByPlayerID/${season}/${week}/${playerID}?key=4f05923a8fb2495db32041a3ac9b913a`
+      // new key
+      `https://api.sportsdata.io/v3/nfl/stats/json/PlayerGameStatsByPlayerID/${season}/${week}/${playerID}?key=79297b2d2a984157bbf6a4174dd9be9e`
     )
     .then(function (response) {
       console.log(response);
