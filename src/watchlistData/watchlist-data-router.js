@@ -15,8 +15,6 @@ const watchlistDataService = require('./watchlist-data-service')
 //         .catch(next)
 // })
 // .post(jsonParser, (req, res, next) => {
-//     const { userId, playerId } = req.body
-//     const newPlayer = { user_id: userId, player_id: playerId }
 
 //     for (const [key, value] of Object.entries(newPlayer))
 //         if (value == null)
@@ -74,15 +72,10 @@ watchlistRouter
     })
     //relevant
     .post(jsonParser, (req, res, next) => {
-        const {
-            title,
-            completed = false
-        } = req.body
-        const newWatchlist = {
-            title
-        }
+        const { userId, playerId } = req.body
+        const newPlayer = { user_id: userId, player_id: playerId }    
 
-        for (const [key, value] of Object.entries(newWatchlist))
+        for (const [key, value] of Object.entries(newPlayer))
             if (value == null)
                 return res.status(400).json({
                     error: {
@@ -90,16 +83,13 @@ watchlistRouter
                     }
                 })
 
-        newWatchlist.completed = completed;
-
         watchlistDataService.insertPlayer(
             req.app.get('db'),
-            newWatchlist
+            newPlayer
         )
             .then(watchlist => {
                 res
                     .status(201)
-                    .location(path.posix.join(req.originalUrl, `/${watchlist.id}`))
                     .json(watchlist)
             })
             .catch(next)
