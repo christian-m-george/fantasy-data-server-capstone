@@ -1,10 +1,15 @@
 const watchlistDataService = {
-	getWatchlistByUserId(knex, user_id) {
+	getWatchlist(knex) {
+		return knex
+		  .from("watchlist")
+		  .select("*")
+	},
+	getWatchlistById(knex, user_id) {
 		return knex
 		  .from("watchlist")
 		  .select("player_id")
 		  .where("user_id", user_id)
-	  },
+	},
 	insertPlayer(knex, newPlayer) {
 		return knex
 			.insert(newPlayer)

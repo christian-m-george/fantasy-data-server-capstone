@@ -9,6 +9,7 @@ const playerDataRouter = require('./playerData/player-data-router')
 const playerDetailRouter = require('./playerDetailData/player-detail-router')
 const watchlistRouter = require('./watchlistData/watchlist-data-router')
 const userRouter = require('./userData/user-data-router')
+const authRouter = require('./auth/auth-router')
 
 
 const app = express()
@@ -30,6 +31,7 @@ app.use('/api/player-data', playerDataRouter)
 app.use('/api/player-detail', playerDetailRouter)
 app.use('/api/watchlist', watchlistRouter)
 app.use('/api/user', userRouter)
+app.use('/api/auth', authRouter)
 
 
 app.use(errorHandler)

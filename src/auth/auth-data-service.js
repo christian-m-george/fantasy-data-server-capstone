@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const config = require('../src/config')
+const config = require('../config')
 
 const AuthService = {
     getUserWithUserName(db, email) {
