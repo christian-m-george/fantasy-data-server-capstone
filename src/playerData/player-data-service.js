@@ -36,7 +36,10 @@ const playerDataService = {
 	return "done"
   },
 
-
+  getAllPlayers(knex) {
+    // console.log(name);
+    return knex.from("players").select('*')
+  },
 
   getByName(knex, name) {
     console.log(name);

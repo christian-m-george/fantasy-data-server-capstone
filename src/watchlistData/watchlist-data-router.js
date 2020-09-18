@@ -4,61 +4,6 @@ const watchlistRouter = express.Router()
 const jsonParser = express.json()
 const watchlistDataService = require('./watchlist-data-service')
 
-//  watchlistRouter
-// .route('/watchlist/1')
-// .get(jsonParser, (req, res, next) => {
-//     const { user_id } = req.body
-//     watchlistDataService.getWatchlistByUserId(req.app.get('db'), user_id)
-//         .then(user => {
-//             res.json(user)
-//         })
-//         .catch(next)
-// })
-// .post(jsonParser, (req, res, next) => {
-
-//     for (const [key, value] of Object.entries(newPlayer))
-//         if (value == null)
-//             return res.status(400).json({
-//                 error: { message: `Missing '${key}' in request body` }
-//             })
-
-//     watchlistDataService.insertPlayer(
-//         req.app.get('db'),
-//         newPlayer
-//     )
-//         .then(response => {
-//             res
-//                 .status(201)
-//                 .json(response)
-//         })
-//         .catch(next)
-// })
-// .delete(jsonParser, (req, res, next) => {
-//     const { user_id, player_id } = req.body
-//     watchlistDataService.deletePlayer(req.app.get('db'), user_id, player_id)
-//         .then(user => {
-//             res.json(user)
-//         })
-//         .catch(next)
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 watchlistRouter
     .route('/')
     //relevant
@@ -73,7 +18,8 @@ watchlistRouter
     //relevant
     .post(jsonParser, (req, res, next) => {
         const { userId, playerId } = req.body
-        const newPlayer = { user_id: userId, player_id: playerId }    
+        const newPlayer = { user_id: userId, player_id: playerId }
+        console.log(newPlayer, 'this is the watchlist post data')
 
         for (const [key, value] of Object.entries(newPlayer))
             if (value == null)
@@ -125,21 +71,41 @@ watchlistRouter
     .get((req, res, next) => {
         res.json(res.watchlist)
     })
-    //relevant
+//relevant
+// .delete((req, res, next) => {
+// const { userId, playerId } = req.body
+// const newPlayer = { user_id: userId, player_id: playerId }
+// console.log(newPlayer, 'this is the watchlist post data') 
+// console.log(req.params, 'this is the params')
+// console.log(req.body, 'this is the body') 
+// watchlistDataService.deletePlayer(
+//     req.app.get('db'),
+//     req.params.watchlist_id
+// )
+// .then(numRowsAffected => {
+//     res.status(204).end()
+// })
+//         .catch(next)
+// })
+
+
+watchlistRouter
+    .route('/:watchlist_id/:player_id')
     .delete((req, res, next) => {
+        console.log('hitting right path')
+        const { watchlist_id, player_id } = req.params
+        // const watchlistRemove = { user_id: watchlist_id, player_id: player_id }
+        console.log(req.params, 'this is the params')
         watchlistDataService.deletePlayer(
             req.app.get('db'),
-            req.params.watchlist_id
+            watchlist_id,
+            player_id
         )
-            .then(numRowsAffected => {
-                res.status(204).end()
-            })
-            .catch(next)
+        .then(() => {
+            res.status(204).end()
+        })
+        .catch(next)
     })
-
-
-
-
 
 
 

@@ -94,47 +94,20 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
       
       });
       
-      // console.log(validatedData, 'this is validated data');
-      // let dbSavePlayer = [];
-
-
-      // dbSavePlayer[i] = {
-      //   FantasyPlayerKey: validatedData.FantasyPlayerKey,
-      //   PlayerID: validatedData.PlayerID,
-      //   Name: validatedData.Name,
-      //   Team: validatedData.Team,
-      //   Position: validatedData.Position,
-      //   AverageDraftPosition: validatedData.AverageDraftPosition,
-      //   AverageDraftPositionPPR: validatedData.AverageDraftPositionPPR,
-      //   ByeWeek: validatedData.ByeWeek,
-      //   LastSeasonFantasyPoints: validatedData.LastSeasonFantasyPoints,
-      //   ProjectedFantasyPoints: validatedData.ProjectedFantasyPoints
-      // };
-
-    //   userService.deleteUser(
-    //     req.app.get('db'),
-    //     user_id
-    // )
-    //     .then(numRowsAffected => {
-    //         res.status(204).end()
-    //     })
-    //     .catch(next)
-
-
-
       playerDataService
         .insertPlayer(req.app.get("db"), validatedData)
-        // .then(insertPlayerResponse => {
-        //   res.status(200).json(validatedData);
-        //   // next();
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        //   next();
-        // });
         res.status(200).json(validatedData)
     })
     .catch((err) => console.log(err));
 });
+
+playerRouter.route('/player/players')
+  .get((req, res, next) => {
+    playerDataService.getAllPlayers(req.app.get('db'))
+      .then(players => {
+        res.status(200).json(players)
+      })
+      .catch(err => console.log(err))
+  })
 
 module.exports = playerRouter;

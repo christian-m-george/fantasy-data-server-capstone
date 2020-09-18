@@ -59,18 +59,18 @@ https: playerDetailRouter.route("/player/details/season/:PlayerID").get((req, re
         return outputURL;
       }
 
-      function checkEmptyImage(inputURL) {
-        let outputURL = inputURL;
-        if (inputURL === undefined) {
-          outputURL =
-            "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
-        }
-        if (inputURL == null) {
-          outputURL =
-            "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
-        }
-        return outputURL;
-      }
+      // function checkEmptyImage(inputURL) {
+      //   let outputURL = inputURL;
+      //   if (inputURL === undefined) {
+      //     outputURL =
+      //       "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
+      //   }
+      //   if (inputURL == null) {
+      //     outputURL =
+      //       "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
+      //   }
+      //   return outputURL;
+      // }
 
       let output = {
         player_id: response.data.PlayerID,
@@ -276,18 +276,18 @@ https: playerDetailRouter.route("/player/details/week").get((req, res, next) => 
         return outputURL;
       }
 
-      function checkEmptyImage(inputURL) {
-        let outputURL = inputURL;
-        if (inputURL === undefined) {
-          outputURL =
-            "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
-        }
-        if (inputURL == null) {
-          outputURL =
-            "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
-        }
-        return outputURL;
-      }
+      // function checkEmptyImage(inputURL) {
+      //   let outputURL = inputURL;
+      //   if (inputURL === undefined) {
+      //     outputURL =
+      //       "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
+      //   }
+      //   if (inputURL == null) {
+      //     outputURL =
+      //       "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
+      //   }
+      //   return outputURL;
+      // }
 
       let output = {
         id: response.data.id,
