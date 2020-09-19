@@ -56,7 +56,7 @@ userRouter
                                 email,
                                 password: hashedPassword,
                             }
-                            console.log(newUser, 'this is the newUser log')
+                            console.log(req.app.get('db'))
                             return userService.insertUser(
                                 req.app.get('db'),
                                 newUser
@@ -66,7 +66,6 @@ userRouter
                                     res.sendStatus(201).json(user)
                                     // .status(201)
                                     // .location(path.posix.join(req.originalUrl, `/${user.id}`))
-
                                 })
                                 .catch(err => {
                                     console.log(err)
