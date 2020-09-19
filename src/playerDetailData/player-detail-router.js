@@ -13,9 +13,9 @@ https: playerDetailRouter.route("/player/details/season/:PlayerID").get((req, re
   axios
     .get(
       // old key
-      // `https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStatsByPlayerID/${season}/${playerID}?key=4f05923a8fb2495db32041a3ac9b913a`
+      `https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStatsByPlayerID/${season}/${playerID}?key=4f05923a8fb2495db32041a3ac9b913a`
       // new key
-      `https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStatsByPlayerID/${season}/${playerID}?key=79297b2d2a984157bbf6a4174dd9be9e`
+      // `https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStatsByPlayerID/${season}/${playerID}?key=79297b2d2a984157bbf6a4174dd9be9e`
     )
     .then(function (response) {
       console.log(response);
