@@ -8,7 +8,6 @@ const axios = require("axios");
 
 https: playerRouter.route("/player/all").get((req, res, next) => {
   const knexInstance = req.app.get("db");
-
   axios
     .get(
       // old key
@@ -100,6 +99,17 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
     })
     .catch((err) => console.log(err));
 });
+
+// playerRouter.route('/player/json')
+//   .get((req, res, next) => {
+//     const {} = req.body
+//     playerDataService.getAllPlayers(req.app.get('db'))
+//       .then(players => {
+//         res.status(200).json(players)
+//       })
+//       .catch(err => console.log(err))
+//   })
+
 
 playerRouter.route('/player/players')
   .get((req, res, next) => {
