@@ -12,8 +12,12 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
     .get(
       // old key
       // "https://api.sportsdata.io/v3/nfl/stats/json/FantasyPlayers?key=4f05923a8fb2495db32041a3ac9b913a"
-      // new key
-      "https://api.sportsdata.io/v3/nfl/stats/json/FantasyPlayers?key=79297b2d2a984157bbf6a4174dd9be9e"
+      // old key
+      "https://api.sportsdata.io/v3/nfl/stats/json/FantasyPlayers?key=13f3b17256374e8496552c4c75f5cf2d"
+      // new key 	
+
+
+      // "https://api.sportsdata.io/v3/nfl/stats/json/FantasyPlayers?key=79297b2d2a984157bbf6a4174dd9be9e"
       // ,
       //   {
       //     headers: {
