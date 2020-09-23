@@ -285,17 +285,6 @@ const playerDataService = {
             return rows;
           });
     },
-  
-  
-  
-    // getByName(knex, name) {
-    //   console.log(name);
-    //   return knex
-    //     .from("movies")
-    //     .select("*")
-    //     .where("name", "LIKE", `%${name}%`)
-    //     .first();
-    // },
   };
   
   module.exports = playerDataService;

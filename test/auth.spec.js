@@ -1,20 +1,22 @@
 require('dotenv').config()
+const { TEST_DATABASE_URL } = require('../src/config')
 const knex = require('knex')
 const jwt = require('jsonwebtoken')
 const app = require('../src/app')
 const helpers = require('./test-helpers')
 
+console.log(TEST_DATABASE_URL, '???')
+
 describe('Auth Endpoints', function () {
     let db
 
     const testUsers = helpers.makeUsersArray()
-    // console.log(testUsers,'this should log the test users')
     const testUser = testUsers[0]
 
     before('make knex instance', () => {
         db = knex({
             client: 'pg',
-            connection: process.env.TEST_DATABASE_URL,
+            connection: TEST_DATABASE_URL,
         })
         app.set('db', db)
     })

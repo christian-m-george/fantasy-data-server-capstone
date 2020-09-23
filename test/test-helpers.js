@@ -49,34 +49,48 @@ function makePlayersArray() {
 
 
 
-function makeExpectedMovie(users, movie = []) {
+
+
+// function makeWatchlistArray(users, player = []) {
+//     const user = users
+//         .find(user => user.id == player.user_id)
+//     return {
+//         serializePlayer(player) {
+//             return {
+                
+//             }
+//         }
+//     }
+// }
+
+function makeExpectedPlayer(users, player = []) {
     const user = users
-        .find(user => user.id == movie.user_id)
+        .find(user => user.id == player.user_id)
     return {
-        serializeMovie(movie) {
+        serializePlayer(player) {
             return {
-                id: movie.id,
-                intensity: movie.intensity,
-                location: movie.location,
-                onset: movie.onset,
-                symptom: movie.symptom,
-                time: movie.time,
-                trigger: movie.trigger,
-                symptom: movie.symptom,
-                treatment: movie.treatment,
-                comment: xss(movie.comment),
+                playerId: player.PlayerID,
+                name: player.Name,
+                team: player.Team,
+                position: player.Position,
+                AverageDraftPosition: player.AverageDraftPosition,
+                AverageDraftPositionPPR: Aplayer.verageDraftPositionPPR,
+                byeWeek: player.ByeWeek,
+                lastSeasonFantasyPoints: player.LastSeasonFantasyPoints,
+                projecedFantasyPoints: player.ProjectedFantasyPoints
             }
         }
     }
 }
 
-function makeMoviesFixtures() {
+function makePlayersFixtures() {
     const testUsers = makeUsersArray()
-    const testMovies = makeMoviesArray()
-    return { testUsers, testMovies }
+    const testPlayers = makePlayersArray()
+    return { testUsers, testPlayers }
 }
 
 function cleanTables(db) {
+    // console.log(db, 'this should be string for db')
     return db.transaction(trx =>
         trx.raw(`TRUNCATE players, users CASCADE`)
             // .then(() =>
@@ -90,26 +104,11 @@ function cleanTables(db) {
     )
 }
 
-function seedMovies(db, movies = []) {
+function seedPlayers(db, players = []) {
     // use a transaction to group the queries and auto rollback on any failure
     return db.transaction(trx =>
-        trx.into('movies').insert(movies)            
+        trx.into('players').insert(players)            
     )
-    // return seedUsers(db, movies)
-    // .then(() =>
-    //     db
-    //         .into('movies')
-    //         .insert(movies)
-    // )
-    // return db.transaction(async trx => {
-    //     await seedMovies(trx, movies)
-    //     await trx.into('movies').insert(movies)
-        // update the auto sequence to match the forced id values
-        // await trx.raw(
-        //     `SELECT setval('movies_id_seq', ?)`,
-        //     [movies[movies.length - 1].id],
-        // )
-    // })
 }
 
 function seedUsers(db, users) {
@@ -136,7 +135,7 @@ function seedPosts(db, posts) {
     //     ...user,
     //     password: bcrypt.hashSync(user.password, 1)
     // }))
-    return db.into('posts').insert(posts)
+    return db.into('watchlist').insert(posts)
         .then(() =>
             // update the auto sequence to stay in sync
             db.select('*').from('posts')
@@ -154,12 +153,11 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
 
 module.exports = {
     makePlayersArray,
-    seedMovies,
-    makeMoviesFixtures,
+    seedPlayers,
+    makePlayersFixtures,
     makeUsersArray,
     cleanTables,
     makeAuthHeader,
     seedUsers,
-    seedPosts,
-    makeExpectedMovie,
+    makeExpectedPlayer,
 }
