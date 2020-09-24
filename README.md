@@ -62,6 +62,169 @@ Watchlist Page |
 ![Watchlist Page](/github-images/watchlist-screenshot.png)  | 
 
 
+## API Endpoints
+
+### Login
+Logs user in
+### URL
+/auth/login
+### Method:
+POST
+### URL Params
+Required:
+email=[string]
+password=[string]
+### Success Response:
+Code: 200
+Content: {
+  AuthToken: AuthService.createJwt(sub, payload),
+  userId: dbUser.id
+}
+### Error Response:
+Code: 404 NOT FOUND
+Content: { error : "Missing field in request body" }
+### Sample Call:
+  $.ajax({
+    url: "/auth/login",
+    dataType: "json",
+    type : "POST",
+    params: {
+      email, password
+    }
+    success : {
+      AuthToken, userId
+    }
+  });
+
+### Player List
+Returns list of players and some data on those players
+### URL
+/player/all
+### Method:
+GET
+### URL Params
+none
+### Success Response:
+Code: 200
+Content: {
+  PlayerID: checkInteger(player.PlayerID),
+  Name: checkString(player.Name),
+  Team: checkString(player.Team),
+  Position: checkString(player.Position),
+  AverageDraftPosition: player.AverageDraftPosition,
+  AverageDraftPositionPPR: player.AverageDraftPositionPPR,
+  ByeWeek: checkInteger(player.ByeWeek),
+  LastSeasonFantasyPoints: player.LastSeasonFantasyPoints,
+  ProjectedFantasyPoints: player.ProjectedFantasyPoints
+}
+### Error Response:
+Code: 400
+### Sample Call:
+  $.ajax({
+    url: "/player/all",
+    dataType: "json",
+    type : "GET",
+    params: none
+    success : {
+      Player object
+    }
+  });
+
+### Player Details
+Returns detailed statistics based on player ID
+### URL
+/player/details/season/:PlayerId
+### Method:
+GET
+### URL Params
+Required:
+PlayerID
+### Success Response:
+Code: 200
+### Error Response:
+Code: 400
+### Sample Call:
+  $.ajax({
+    url: "/player/details/season/18877",
+    dataType: "json",
+    type : "GET",
+    params: PlayerId
+    success : {
+      Player object
+    }
+  });
+
+### Post User
+Adds user to database
+### URL
+/user
+### Method:
+POST
+### URL Params
+Required:
+Username
+Email
+Password
+### Success Response:
+Code: 202
+### Error Response:
+Code: 400
+### Sample Call:
+  $.ajax({
+    url: "/user",
+    dataType: "json",
+    type : "POST",
+    params: username, email, password
+    success : 202
+  });
+
+### Post to watchlist
+Adds a player to watchlist
+### URL
+/watchlist
+### Method:
+POST
+### URL Params
+Required:
+User ID
+Player ID
+### Success Response:
+Code: 202
+### Error Response:
+Code: 400
+### Sample Call:
+  $.ajax({
+    url: "/user",
+    dataType: "json",
+    type : "POST",
+    params: userId, playerId
+    success : 202
+  });
+
+### Get Watchlist
+Retrieves user's watchlist based on User ID
+### URL
+/:watchlist_id/:player_id
+### Method:
+GET
+### URL Params
+Required:
+User ID
+### Success Response:
+Code: 200
+### Error Response:
+Code: 400
+### Sample Call:
+  $.ajax({
+    url: "/user",
+    dataType: "json",
+    type : "Get",
+    params: userId
+    success : 200
+    Watclist Object
+  });
+
+
 ## Functionality
 The app's functionality includes:
 

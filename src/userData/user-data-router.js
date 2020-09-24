@@ -10,14 +10,8 @@ const bcrypt = require('bcrypt')
 userRouter
     .route('/user')
     .get((req, res, next) => {
-        // const { users } = {
-        //     username,
-        //     email,
-        //     password
-        // }
         userService.getAllUsers(req.app.get('db'))
             .then(user => {
-                // res.json(user.map(userService.serializeUser(user)))
                 res.json(user)
             })
             .catch(next)
@@ -64,12 +58,9 @@ userRouter
                                 .then(user => {
                                     console.log(user, 'this is the user log')
                                     res.sendStatus(201).json(user)
-                                    // .status(201)
-                                    // .location(path.posix.join(req.originalUrl, `/${user.id}`))
                                 })
                                 .catch(err => {
                                     console.log(err)
-                                    // res.sendStatus(400).json({ error: `Could not insert user` })
                                 })
 
                         })

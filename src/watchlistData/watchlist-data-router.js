@@ -1,5 +1,4 @@
 const express = require('express')
-const path = require('path')
 const watchlistRouter = express.Router()
 const jsonParser = express.json()
 const watchlistDataService = require('./watchlist-data-service')
@@ -71,30 +70,12 @@ watchlistRouter
     .get((req, res, next) => {
         res.json(res.watchlist)
     })
-//relevant
-// .delete((req, res, next) => {
-// const { userId, playerId } = req.body
-// const newPlayer = { user_id: userId, player_id: playerId }
-// console.log(newPlayer, 'this is the watchlist post data') 
-// console.log(req.params, 'this is the params')
-// console.log(req.body, 'this is the body') 
-// watchlistDataService.deletePlayer(
-//     req.app.get('db'),
-//     req.params.watchlist_id
-// )
-// .then(numRowsAffected => {
-//     res.status(204).end()
-// })
-//         .catch(next)
-// })
-
 
 watchlistRouter
     .route('/:watchlist_id/:player_id')
     .delete((req, res, next) => {
         console.log('hitting right path')
         const { watchlist_id, player_id } = req.params
-        // const watchlistRemove = { user_id: watchlist_id, player_id: player_id }
         console.log(req.params, 'this is the params')
         watchlistDataService.deletePlayer(
             req.app.get('db'),

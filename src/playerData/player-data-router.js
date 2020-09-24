@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const playerDataService = require("./player-data-service");
 const playerRouter = express.Router();
 const axios = require("axios");
@@ -56,31 +55,6 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
         return outputText;
       }
 
-      // if a URL is undefinded or null, default it to the root url "/"
-      function checkURL(inputURL) {
-        let outputURL = inputURL;
-        if (inputURL === undefined) {
-          outputURL = "/";
-        }
-        if (inputURL == null) {
-          outputURL = "/";
-        }
-        return outputURL;
-      }
-
-      function checkEmptyImage(inputURL) {
-        let outputURL = inputURL;
-        if (inputURL === undefined) {
-          outputURL =
-            "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
-        }
-        if (inputURL == null) {
-          outputURL =
-            "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png";
-        }
-        return outputURL;
-      }
-
       let validatedData = response.data.map((player) => {
         let output = {
           PlayerID: checkInteger(player.PlayerID),
@@ -103,16 +77,6 @@ https: playerRouter.route("/player/all").get((req, res, next) => {
     })
     .catch((err) => console.log(err));
 });
-
-// playerRouter.route('/player/json')
-//   .get((req, res, next) => {
-//     const {} = req.body
-//     playerDataService.getAllPlayers(req.app.get('db'))
-//       .then(players => {
-//         res.status(200).json(players)
-//       })
-//       .catch(err => console.log(err))
-//   })
 
 
 playerRouter.route('/player/players')
