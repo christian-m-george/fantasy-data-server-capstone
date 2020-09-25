@@ -3,7 +3,7 @@ const playerDetailService = require("./player-detail-service");
 const playerDetailRouter = express.Router();
 const axios = require("axios");
 
-https: playerDetailRouter.route("/player/details/season/:PlayerID").get((req, res, next) => {
+https: playerDetailRouter.route("/season/:PlayerID").get((req, res, next) => {
   const knexInstance = req.app.get("db");
 
   let playerID = req.params.PlayerID;
